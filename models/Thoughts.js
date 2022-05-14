@@ -13,8 +13,12 @@ const thoughtSchema = new Schema(
             default: Date.now,
         },
         username: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',            
+            type: String,
+            required: true,
         },
     },
-)
+);
+
+const Thoughts = model('Thoughts', thoughtSchema);
+
+module.exports = Thoughts;
