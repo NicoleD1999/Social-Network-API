@@ -18,10 +18,10 @@ module.exports = {
   },
   // Create a thoughts
   createThought(req, res) {
-    thoughts.create(req.body)
+    Thoughts.create(req.body)
       .then((thoughts) => {
         return User.findOneAndUpdate(
-          { _id: req.body.postId },
+          { username: req.body.username },
           { $push: { thoughts: thoughts._id } },
           { new: true }
         );
@@ -30,8 +30,8 @@ module.exports = {
         !user
           ? res
               .status(404)
-              .json({ message: 'thoughts created, but no posts with this ID' })
-          : res.json({ message: 'thoughts created' })
+              .json({ message: 'thought created, but no user with this ID' })
+          : res.json({ message: 'thought created' })
       )
       .catch((err) => {
         console.error(err);

@@ -3,7 +3,7 @@ const {
   getThoughts,
   getSingleThought,
   createThought,
-} = require('../../controllers/thoughtsController');
+} = require('../../controllers/thoughtsControllers');
 
 // /api/comments
 router.route('/').get(getThoughts).post(createThought);
