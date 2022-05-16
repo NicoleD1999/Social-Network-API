@@ -1,3 +1,4 @@
+const res = require('express/lib/response');
 const {User} = require('../models')
 
 module.exports = {
@@ -48,18 +49,13 @@ module.exports = {
             .catch((err)=> res.status(500).json(err));
     },
     createFriend(req,res){
-        User.findOneAndUpdate({_id: req.params.userId})
-            .then((user)=>
-                !user
-                    ?res.status(404).json({message:"No User with this ID"})
-                    :User.create(
-                        {_id: {$in: user.friends}},
-                        {$friends: req.params.friendId},
-                        {runValidators: true, new: true},
-                    )
-                )
-                .then(()=>res.json({message: "Friend Added"}))
-                .catch((err)=> res.status(500).json(err))    
+        User.findOneAndUpdate({_id: req.params.userId}, {$addToSet: {friends: req.params.friendId}}, {runValidators: true, new: true})
+        .then((userData)=>
+                !userData
+                    ? res.status(404).json({message: "No user with this ID"})
+                    : res.json(userData)
+        )
+        .catch((err)=> res.status(500).json(err));    
     },
     deleteFriend(req,res){
         User.findOneAndDelete({ _id: req.params.userId })
