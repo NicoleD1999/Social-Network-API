@@ -37,4 +37,23 @@ module.exports = {
         console.error(err);
       });
   },
+
+  createReaction(req, res) {
+    Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$addToSet: {reactions: req.body}}, {runValidators: true, new: true})
+    .then((reactions)=>
+      !reactions
+        ? res.status(404).json({message: "No Thought found with this ID"})
+        : res.json(reactions)
+      )
+      .catch((err)=> res.status(500).json(err));
+  },
+  deleteReaction(req, res) {
+  Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$pull: {reactions: { reactionId: req.body.reactionId }}}, {runValidators: true, new: true})
+    .then((reactions)=>
+      !reactions
+        ? res.status(404).json({message: "No Thought or Reaction found with this ID"})
+        : res.json(reactions)
+      )
+      .catch((err)=> res.status(500).json(err)); 
+  }
 };
