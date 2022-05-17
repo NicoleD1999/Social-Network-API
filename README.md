@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/License-MIT-blueviolet)
 
 ## Description
-In this application the user will be able to create new users, thoughts, friends, and reactions, the user can also update thoughts and users, as well as delete thoughts, users, reactions and friends. The user must use the specified routes in order to properly add, delete, and update everything mentioned above. For a proper demonstration of the application please watch the video demonstration below to see all routes used and fields required for functional application
+In this application the user will be able to create new users, thoughts, friends, and reactions, the user can also update thoughts and users, as well as delete users, reactions and friends. The user must use the specified routes in order to properly add, delete, and update everything mentioned above. For a proper demonstration of the application please watch the video demonstration below to see all routes used and fields required for functional application.
 
 
 # Table of Contents
